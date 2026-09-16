@@ -74,7 +74,7 @@
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_01_Launch">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_01_Launch" enabled="true">
             <boolProp name="TransactionController.parent">true</boolProp>
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
@@ -923,12 +923,12 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_04_Click Requirements Tab">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_04_Click Requirements Tab" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_04_Click Requirements Tab-144 - P Req Nav">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_04_Click Requirements Tab-144 - P Req Nav" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1028,7 +1028,7 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_04_Click Requirements Tab-145 - P Requirements">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_04_Click Requirements Tab-145 - P Requirements" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1131,7 +1131,7 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 145 - Get Requirement/Record Ref Id" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1139,25 +1139,22 @@
               <stringProp name="script">import groovy.json.*
 import jmeter.appian.groundswell.Jag2
 
-def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+log.info(&quot;****************************** Post Processor 145 ******************************&quot;)
 
-// Extracting Record ID Value
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
 
 try{
 	
-//************ Get Record Id ******************//
+//************ Get Record Ref Id ******************//
 
-	def recordIDParentJson = JAG.getObjectsByType(&quot;RecordLink&quot;).find({it?.toString()?.contains(&quot;requirements&quot;)})
-	log.info(&quot;Record ID : Parent block -----&gt; &quot; + JsonOutput.toJson(recordIDParentJson))
+	def recordRefIdParentJson = JAG.getObjectsByType(&quot;RecordLink&quot;).find({it?.toString()?.contains(&quot;requirements&quot;)})
+	log.info(&quot;Record Ref ID Parent block Json-----&gt; &quot; + JsonOutput.toJson(recordRefIdParentJson))
 
-	def recordIDJson = new JsonSlurper().parseText(JsonOutput.toJson(recordIDParentJson))
+	def recordRefIdJson = new JsonSlurper().parseText(JsonOutput.toJson(recordRefIdParentJson))
 
-	def RecordId = recordIDJson._recordRef
-	log.info(&quot;Record Id value is *****&gt;${RecordId}&lt;*****&quot;)
-	vars.put(&quot;Record_Id&quot;, &quot;${RecordId}&quot;)
-
-	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)		
-
+	def recordRefIdValue = recordRefIdJson._recordRef
+	log.info(&quot;Record Ref Id value is -----&gt;${recordRefIdValue}&lt;-----&quot;)
+	vars.put(&quot;recordRefId&quot;, &quot;${recordRefIdValue}&quot;)
 }
 catch(e){
 	log.error(&quot;Record Id extraction&quot; + e.message)
@@ -1283,7 +1280,7 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_05_Click Requirement ID-147 - P Req Nav">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_05_Click Requirement ID-147 - P Req Nav" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1386,12 +1383,40 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 147 - Get Context Value and Uuid" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 147 ******************************&quot;)
+
+try{
+
+	//************ Get Context Value / Uuid ******************//	
+	
+	def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+	JAG.setSailContextAndUuid(&quot;Req147_requirementId_contextValue&quot;,&quot;Req147_requirementId_Uuid&quot;); // Use these values in Step 163
+	
+	log.info(&quot;147 - Requirement ID Context Value value is -----&gt;&quot; +  vars.get(&quot;Req147_requirementId_contextValue&quot;)) // Use these values in Step 163
+	log.info(&quot;147 - Requirement ID Uuid value is -----&gt;&quot; +  vars.get(&quot;Req147_requirementId_Uuid&quot;))	// Use these values in Step 163
+
+}
+catch(e){
+	log.error(&quot;Click Requirement ID-147 - P Req Nav&quot; + e.message)
+}
+
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_05_Click Requirement ID-148 - Req ID View Summary">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_05_Click Requirement ID-148 - Req ID View Summary" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${Record_Id}/view/summary</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${recordRefId}/view/summary</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1486,7 +1511,7 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 148 - Get Opaque Related Action Id" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1494,51 +1519,57 @@ catch(e){
               <stringProp name="script">import groovy.json.*
 import jmeter.appian.groundswell.Jag2
 
-def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+log.info(&quot;****************************** Post Processor 148 ******************************&quot;)
 
-// Extracting Record ID Value
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+JAG.swapToHeader()
+
+def reqIDSummaryJson = JAG.getData()
+log.info(&quot;148 - Requirement View Summary Json -----&gt;&quot; + JsonOutput.toJson(reqIDSummaryJson))
 
 try{
 
-//************ Get Action Dialog Id ******************//	
 
-	def actionDialogParentJson = JAG.getObjectByProperty(&quot;name&quot;,&quot;x-embedded-header&quot;)
-	log.info(&quot;Action Dialog : Parent block 1 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJson))
-	log.info(&quot;Action Dialog : Parent block 2 -----&gt; &quot; + actionDialogParentJson)	
+	//************ Get Action Dialog Id / Opaque Related Action Id ******************//	
 /*
-	def actionDialogSailControl = JAG.createControl(actionDialogParentJson, &quot;actionDialogId&quot;)
+	def actionDialogParentJson = JAG.getObjectByProperty(&quot;name&quot;,&quot;x-embedded-header&quot;)
+	log.info(&quot;Action Dialog / Opaque Related Action Id : Parent block 1 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJson))
+	log.info(&quot;Action Dialog / Opaque Related Action Id : Parent block 2 -----&gt; &quot; + actionDialogParentJson)	
 
-	JAG.saveSail(actionDialogSailControl)
-
-	log.info(&quot;Active Dialog value is *****&gt; &quot; +  vars.get(&quot;actionDialogId_opaqueRelatedActionId&quot;))
-	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)	
-*/	
-
-	def actionDialogParentJsonFormat1 = JAG.getObjectsByProperty(actionDialogParentJson,&quot;description&quot;,&quot;Update this Requirement&quot;).find()
-	log.info(&quot;Action Dialog : Parent block 3.1 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJsonFormat1))
-	def actionDialogParentJsonFormat2 = JAG.getObjectsByProperty(actionDialogParentJson, &quot;#t&quot;, &quot;RelatedActionLink&quot;).find()
-//	log.info(&quot;TaskId: Parent block 2 -----&gt; &quot; + JsonOutput.toJson(reportStubUrlTaskIdJson))	
-//	vars.putObject(&quot;actionDialogParentJsonFormat&quot;,JsonOutput.toJson(actionDialogParentJson?.children))		
-//	vars.putObject(&quot;actionDialogParentJsonFormat&quot;,JsonOutput.toJson(actionDialogParentJson?.children.first()).replaceAll(&quot;\&quot;&quot;,&quot;&quot;))	
-//	vars.putObject(&quot;actionDialogParentJsonFormat&quot;,JsonOutput.toJson(actionDialogParentJson.first()).replaceAll(&quot;\&quot;&quot;,&quot;&quot;))	
-//	vars.putObject(&quot;actionDialogParentJsonFormat&quot;,JsonOutput.toJson(actionDialogParentJson).replaceAll(&quot;\&quot;&quot;,&quot;&quot;)) 
-	log.info(&quot;Action Dialog : Parent block 3.2 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJsonFormat2))
-
+	def cleanedJsonString = JsonOutput.toJson(actionDialogParentJson).replace(&apos;\\\&quot;&apos;,&apos;&quot;&apos;)
+	log.info(&quot;Unescaped Json value is  2------&quot; + cleanedJsonString)	
+*/
+/*
+	String unescapeJson(String escapedJsonString) {
+	    if (!(escapedJsonString instanceof String)) {
+	        throw new IllegalArgumentException(&quot;Input must be a String&quot;)
+	    }
+	    try {
+	        // Wrap in quotes if not already valid JSON string
+	        String jsonWrapped = escapedJsonString.startsWith(&apos;&quot;&apos;) &amp;&amp; escapedJsonString.endsWith(&apos;&quot;&apos;)
+	                ? escapedJsonString
+	                : &quot;\&quot;${escapedJsonString}\&quot;&quot;
 	
-	def actionIDJson = new JsonSlurper().parseText(JsonOutput.toJson(actionDialogParentJson))
+	        // Parse JSON string to unescape
+	        def parsed = new JsonSlurper().parseText(jsonWrapped)
+	        return parsed.toString()
+	    } catch (Exception e) {
+	        throw new RuntimeException(&quot;Invalid JSON string: ${e.message}&quot;, e)
+	    }
+	}
 
-//	def actionId = actionIDJson.opaqueRelatedActionId
-	def actionId = actionIDJson.children	
-	log.info(&quot;Action Dialog : Parent block 4 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJsonFormat))	
-	
-	log.info(&quot;Action Id value is *****&gt;${actionId}&lt;*****&quot;)
-	vars.put(&quot;Action_Id&quot;, &quot;${actionId}&quot;)
+	log.info(&quot;Unescaped Json  : Parent block 5	 -----&gt;  ${unescapeJson(actionDialogParentJson)}&quot;)	
+*/
+	def opaqueRelatedActionIdJson = JAG.getObjectsByProperty(reqIDSummaryJson, &quot;#t&quot;, &quot;RelatedActionLink&quot;).find{it?.description ==&quot;Update this Requirement&quot;}.source
+	log.info(&quot;148 - Opaque Related Action Id Json -----&gt; &quot; + JsonOutput.toJson(opaqueRelatedActionIdJson))
 
-	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)			
+	def opaqueRelatedActionIdValue = opaqueRelatedActionIdJson.opaqueRelatedActionId 
+	vars.put(&quot;opaqueRelated_ActionId&quot;, opaqueRelatedActionIdValue)
+	log.info(&quot;148 - Opaque Related Action Id value is -----&gt;&quot; + opaqueRelatedActionIdValue)
 
 }
 catch(e){
-	log.error(&quot;Record Id extraction&quot; + e.message)
+	log.error(&quot;Click Requirement ID-148 - Req ID View Summary&quot; + e.message)
 }
 
 </stringProp>
@@ -1551,11 +1582,11 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_06_Click Update Requirement Button-149 - Action Dialog">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_06_Click Update Requirement Button-149 - Action Dialog" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/record/latest/${Record_Id}/actionDialog/yOo9ow6oJhzTw5zOxQm8gTSLAFHJnLY_du65axp2R-xD6QOhWTSf41ne8fwXtkPRNPBjlKfR0VdRO160Sdi</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/record/latest/${recordRefId}/actionDialog/${opaqueRelated_ActionId}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1652,7 +1683,7 @@ catch(e){
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/record/latest/${Record_Id}/actionDialog/yOo9ow6oJhzTw5zOxQm8gTSLAFHJnLY_du65axp2R-xD6QOhWTSf41ne8fwXtkPRNPBjlKfR0VdRO160Sdi</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/record/latest/${recordRefId}/actionDialog/${opaqueRelated_ActionId}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1753,51 +1784,52 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 150 - Get Context Value, Uuid, _cId, SaveInto, Opaque Task Id">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="script">import groovy.json.*
 import jmeter.appian.groundswell.Jag2
-import java.net.URLEncoder
+
+log.info(&quot;****************************** Post Processor 150 ******************************&quot;)
 
 def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
 JAG.setSailContextAndUuid();
 
-log.info(&quot;Record Id Context Id value is ---- &quot; +  vars.get(&quot;context&quot;))
-log.info(&quot;Record Id Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
+log.info(&quot;150 - Title Context Id value is ----&gt; &quot; +  vars.get(&quot;context&quot;))
+log.info(&quot;150 - Title Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
 
 try{
-//************ Get Opaque Task Id ******************//
+	//************ Get Opaque Task Id ******************//
 
-//	def opaque_TaskId = JAG.getOpaqueTaskId()
-//	log.info(&quot;Opaque Task Id -----&gt; &quot; + vars.get(&quot;opaque_TaskId&quot;))	
-	def opaqueTaskIdParentJson = JAG.getObjectByProperty(&quot;title&quot;,&quot;Update Requirement&quot;)
-	log.info(&quot;Opaque Task Id : Parent block 10 -----&gt; &quot; + JsonOutput.toJson(opaqueTaskIdParentJson))
-	def opaqueTaskIdSailControl = JAG.createControl(opaqueTaskIdParentJson, &quot;opaqueTaskIdData&quot;)
-	JAG.saveSail(opaqueTaskIdSailControl)
-	log.info(&quot;Opaque Task Id value is *****&gt; &quot; +  vars.get(&quot;opaqueTaskIdData_opaqueTaskId&quot;))	
+	def opaque_TaskId = JAG.getOpaqueTaskId()
+	log.info(&quot;150 - Opaque Task Id -----&gt; &quot; + opaque_TaskId)	
+	JAG.saveOpaqueTaskID(&quot;opaqueTaskId&quot;)
+	log.info(&quot;150 - Opaque Task Id value is *****&gt;&quot; +  vars.get(&quot;opaqueTaskId&quot;))	
 
-//************ Get Save Into ******************//
+	//************ Get cId ******************//	
+/*
+	def modTitleCIdValue = JAG.getObjectsByProperty(&quot;#t&quot;, &quot;FormLayout&quot;).find().focusFieldId
+	log.info(&quot;150 - Title cId Parent Json 2 -----&gt; &quot; + JsonOutput.toJson(modifyTitleParentJson))		
+	log.info(&quot;150 - Title cId value -----&gt; &quot; + modTitleCIdValue)	
+	vars.put(&quot;modTitlecId&quot;,modTitleCIdValue)
+*/
+	//************ Get cId &amp; Save Into ******************//
 
-	def actionDialogParentJson = JAG.getObjectByProperty(&quot;label&quot;,&quot;Update Requirement&quot;)
-	log.info(&quot;Action Dialog : Parent block 11 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJson))
+//	def modifyTitleParentJson = JAG.getObjectByProperty(&quot;label&quot;,&quot;Title&quot;)
+//	log.info(&quot;150 - Title saveInto Parent Json 1 -----&gt; &quot; + JsonOutput.toJson(modifyTitleParentJson))
+	def modifyTitleParentJson = JAG.getObjectByLabel(&quot;Title&quot;)	// Use getObjectByLabel for field with value instead of getObjectByProperty as above
+	log.info(&quot;150 - Title saveInto Parent Json 2 -----&gt; &quot; + JsonOutput.toJson(modifyTitleParentJson))	
 
-	def actionDialogSailControl = JAG.createControl(actionDialogParentJson, &quot;actionDialogsaveInto&quot;)
-	JAG.saveSail(actionDialogSailControl)
-	log.info(&quot;Active Tags saveInto value is *****&gt; &quot; +  vars.get(&quot;actionDialogsaveInto_saveInto&quot;))	
-	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)
-
-//************ Get Focus Field Id ******************//	
-
-//	def actionDialogParentJson = JAG.getObjectsByLabel(&quot;focusFieldId&quot;)
-//	log.info(&quot;Action Dialog : Parent block 11 -----&gt; &quot; + JsonOutput.toJson(actionDialogParentJson))
-
-
+	def modifyTitleSailControl = JAG.createControl(modifyTitleParentJson, &quot;modifyTitleValues&quot;)
+	JAG.saveSail(modifyTitleSailControl)
+	log.info(&quot;150 - Title saveInto value is *****&gt;&quot; +  vars.get(&quot;modifyTitleValues_saveInto&quot;))
+	log.info(&quot;150 - Title cId value is *****&gt;&quot; +  vars.get(&quot;modifyTitleValues_cId&quot;))
+	
 }
 catch(e){
-	log.error(&quot;All Tags cId &amp; saveInto extraction&quot; + e.message)
+	log.error(&quot;Click Update Requirement Button-150 - Verify This Request&quot; + e.message)
 }	</stringProp>
             </JSR223PostProcessor>
             <hashTree/>
@@ -1914,11 +1946,11 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_07_Modify Title-153 - Form">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_07_Modify Title -153 - Form">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/xADIfkW82WS1RYxuyp/form</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/${opaqueTaskId}/form</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1933,16 +1965,16 @@ catch(e){
         &quot;#t&quot;: &quot;SaveRequest?list&quot;,&#xd;
         &quot;#v&quot;: [&#xd;
             {&#xd;
-                &quot;_cId&quot;: &quot;9415b8dde1fd3948193aa17b3d01fbf1&quot;,&#xd;
+                &quot;_cId&quot;: &quot;${modifyTitleValues_cId}&quot;,&#xd;
                 &quot;model&quot;: {&#xd;
                     &quot;#t&quot;: &quot;TextWidget&quot;&#xd;
                 },&#xd;
                 &quot;value&quot;: {&#xd;
                     &quot;#t&quot;: &quot;Text&quot;,&#xd;
-                    &quot;#v&quot;: &quot;SP_LT_CR_0828261840&quot;&#xd;
+                    &quot;#v&quot;: &quot;SP_LT_CR_090420261300&quot;&#xd;
                 },&#xd;
                 &quot;saveInto&quot;: [&#xd;
-                    &quot;&lt;&lt;wx4EAwMCQU56wChJsE8Bi41L+ui24YIDwFZ39jsB9njShwFHJnLY/du65axp2xTZWaEY6V+7O/Qo\r\nFEsCfdZQObcMay84e0oYUP3hvQLvckxKy36BVxs7Hwys1obTtBPES1NqiGqwTk9A0/Bwu3pl/u9x\r\n3jm3kDkxBBPq41Jz7FmNNEpkhK7Km3BGw/osCcSrtPe9DFALhFaUtzQZMEo8b0hwveIrO5FVTA==\r\n&gt;&gt;&quot;&#xd;
+                    &quot;${modifyTitleValues_saveInto}&quot;&#xd;
                 ],&#xd;
                 &quot;saveType&quot;: &quot;PRIMARY&quot;,&#xd;
                 &quot;isAsyncRequest&quot;: false,&#xd;
@@ -2057,6 +2089,41 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 153 - Get Get Context Value, Uuid, SaveInto, _cId" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 153 ******************************&quot;)
+
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+JAG.setSailContextAndUuid();
+
+log.info(&quot;153 - Description Context Id value is ---- &quot; +  vars.get(&quot;context&quot;))
+log.info(&quot;153 - Description Id Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
+
+try{
+
+	//************ Get Save Into &amp; cId value ******************//
+
+	def modifyDescParentJson = JAG.getObjectByLabel(&quot;Description&quot;)	// Use getObjectByLabel for field with value instead of getObjectByProperty as above
+	log.info(&quot;153 - Description saveInto Parent Json -----&gt;&quot; + JsonOutput.toJson(modifyDescParentJson))
+	
+	def modifyDescSailControl = JAG.createControl(modifyDescParentJson, &quot;modifyDescsaveInto&quot;)
+	JAG.saveSail(modifyDescSailControl)
+	log.info(&quot;153 - Description saveInto value is *****&gt;&quot; +  vars.get(&quot;modifyDescsaveInto_saveInto&quot;))
+	log.info(&quot;153 - Description cId value is *****&gt;&quot; +  vars.get(&quot;modifyDescsaveInto_cId&quot;))
+
+
+}
+catch(e){
+	log.error(&quot;Modify Title -153 - Form&quot; + e.message)
+}	</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_07_Modify Title-154 - Flush" enabled="false">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
@@ -2165,16 +2232,16 @@ catch(e){
             <hashTree/>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_08_Modify Description">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_08_Modify Description" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_08_Modify Description-155 - Form">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_08_Modify Description-155 - Form" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/xADIfkW82WS1RYxuyp/form</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/${opaqueTaskId}/form</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2189,16 +2256,16 @@ catch(e){
         &quot;#t&quot;: &quot;SaveRequest?list&quot;,&#xd;
         &quot;#v&quot;: [&#xd;
             {&#xd;
-                &quot;_cId&quot;: &quot;cae520b2ac732af26a3124611a03d205&quot;,&#xd;
+                &quot;_cId&quot;: &quot;${modifyDescsaveInto_cId}&quot;,&#xd;
                 &quot;model&quot;: {&#xd;
                     &quot;#t&quot;: &quot;ParagraphWidget&quot;&#xd;
                 },&#xd;
                 &quot;value&quot;: {&#xd;
                     &quot;#t&quot;: &quot;Text&quot;,&#xd;
-                    &quot;#v&quot;: &quot;Load Test Description for test case DIABPS -32 0828261840&quot;&#xd;
+                    &quot;#v&quot;: &quot;Load Test Description for test case DIABPS -32 090420261300&quot;&#xd;
                 },&#xd;
                 &quot;saveInto&quot;: [&#xd;
-                    &quot;&lt;&lt;wx4EAwMCQU56wChJsE8Bi41L+ui24YIDwFZ39jsB9njSgwFHJnLY/du65axp2xTZWaEY6V+7O/Qo\r\nFEsCfdZQObcMay84e0oYUP3hvQLvckxKy36BVxs7Hwys1obTtBPES1NqiGqwTk9A0/Bwu3pl/u9x\r\n3jm3kDkxBBPq41J17F2EIVUu8ZO4CP+yJcAoAlQUzcCgq6K0cs0Y66j7UxYUtPwjhXvd\r\n&gt;&gt;&quot;&#xd;
+                    &quot;${modifyDescsaveInto_saveInto}&quot;&#xd;
                 ],&#xd;
                 &quot;saveType&quot;: &quot;PRIMARY&quot;,&#xd;
                 &quot;isAsyncRequest&quot;: false,&#xd;
@@ -2208,10 +2275,10 @@ catch(e){
     },&#xd;
     &quot;context&quot;: {&#xd;
         &quot;type&quot;: &quot;stateful&quot;,&#xd;
-        &quot;value&quot;: &quot;wx4EAwMC3i8mVTSC9XUBL4pNynw/mG1B/b+XNOVB9LHSoAGB6lK7DRy7NvRdQkF1Xl99qQDgVyOk\r\nuhPQhY3aOh810OU4vGj5Is9TXeCrFKNlfFxx/y6O/9oZISQrd4gL/LFveBgSa5qzOsX5qxWimN/r\r\nhurP69A8QBmaWTQzxb1kEJAPXBWf4Wl7G0fI8qMesPRSz5w2zmNKnk27HO5KwS3v9MzxKF+CKhkd\r\naTl8Q0ctgac/2yREqxiIAc2dO1VhICI=\r\n&quot;,&#xd;
+        &quot;value&quot;: &quot;${context}&quot;,&#xd;
         &quot;#t&quot;: &quot;Map&quot;&#xd;
     },&#xd;
-    &quot;uuid&quot;: &quot;bd130902-4ea5-44c0-9005-843152bb69ed&quot;,&#xd;
+    &quot;uuid&quot;: &quot;${uuid}&quot;,&#xd;
     &quot;sailContextVersion&quot;: &quot;3&quot;&#xd;
 }</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
@@ -2313,18 +2380,52 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 155 - Get Get Context Value, Uuid, SaveInto, _cId" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 155 ******************************&quot;)
+
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+JAG.setSailContextAndUuid();
+
+log.info(&quot;155 - Update Req Button Context Id value is ---- &quot; +  vars.get(&quot;context&quot;))
+log.info(&quot;155 - Update Req Button Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
+
+try{
+	
+	//************ Get Save Into &amp; cId value ******************//
+/*
+	def upReqButtonParentJson = JAG.getObjectByLabel(&quot;Description&quot;)	// Use getObjectByLabel for field with value instead of getObjectByProperty as above
+	log.info(&quot;155 - Update Req Button saveInto Parent Json -----&gt;&quot; + JsonOutput.toJson(upReqButtonParentJson))
+	
+	def upReqButtonSailControl = JAG.createControl(upReqButtonParentJson, &quot;upReqButtonsaveInto&quot;)
+	JAG.saveSail(upReqButtonSailControl)
+	log.info(&quot;155 - Update Req Button saveInto value is *****&gt;&quot; +  vars.get(&quot;upReqButtonsaveInto_saveInto&quot;))
+	log.info(&quot;155 - Update Req Button cId value is *****&gt;&quot; +  vars.get(&quot;upReqButtonsaveInto_cId&quot;))
+*/
+}
+catch(e){
+	log.error(&quot;Modify Description-155 - Form&quot; + e.message)
+}	</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_09_Click Update Requirement Button">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 41 - URPM_09_Click Update Requirement Button" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-161 - Form">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-161 - Form" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/xADIfkW82WS1RYxuyp/form</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/task/latest/${opaqueTaskId}/form</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2339,7 +2440,7 @@ catch(e){
         &quot;#t&quot;: &quot;SaveRequest?list&quot;,&#xd;
         &quot;#v&quot;: [&#xd;
             {&#xd;
-                &quot;_cId&quot;: &quot;62ee0422c5b9ed991545b9d61b824c76&quot;,&#xd;
+                &quot;_cId&quot;: &quot;${modifyTitleValues_cId}&quot;,&#xd;
                 &quot;label&quot;: &quot;Update Requirement&quot;,&#xd;
                 &quot;model&quot;: {&#xd;
                     &quot;#t&quot;: &quot;ButtonWidget&quot;,&#xd;
@@ -2350,7 +2451,7 @@ catch(e){
                     &quot;#t&quot;: &quot;string&quot;&#xd;
                 },&#xd;
                 &quot;saveInto&quot;: [&#xd;
-                    &quot;&lt;&lt;wx4EAwMCQU56wChJsE8Bi41L+ui24YIDwFZ39jsB9njSeAFHJnLY/du65axp2xTZWaEY6V+7O/Qo\r\nFEsCfdZQObcMay84e0oYUP3hvQLvckxKy36BVxs7Hwys1obTtBPES1NqiGqwTk9A0/FF0E75D1CW\r\nkddzBuaoewuLAb4PzNeUaPfWuMAMg1jGQbtbc82eNDmtRHYaoyzRrA==\r\n&gt;&gt;&quot;&#xd;
+                    &quot;${modifyTitleValues_saveInto}&quot;&#xd;
                 ],&#xd;
                 &quot;saveType&quot;: &quot;PRIMARY&quot;,&#xd;
                 &quot;isAsyncRequest&quot;: false,&#xd;
@@ -2360,12 +2461,46 @@ catch(e){
     },&#xd;
     &quot;context&quot;: {&#xd;
         &quot;type&quot;: &quot;stateful&quot;,&#xd;
-        &quot;value&quot;: &quot;wx4EAwMCX5GtXqSpxdcBr2rN6LEz1yb7lTThIb9IIvPSoAG0w6jDIn5tEX0EAAABiWN8cJKV29jz\r\n2xR6at1wIkxeDI46I+RU0CUMCwVDHWodySGpVI0jRP+94a4gz/3PgeEtmElgX2YIcZHr5GTSrSL4\r\nJjOtXNgQOWEtzMaCqXk9HKOTmmx6mtaJ1PVs86Q22aZq7Lz11NrVm3x93Gz9W2McXmGX3b0e9+kf\r\n35wj2vogCePgYVYwJbAPs6iHO8ewFPk=\r\n&quot;,&#xd;
+        &quot;value&quot;: &quot;${context}&quot;,&#xd;
         &quot;#t&quot;: &quot;Map&quot;&#xd;
     },&#xd;
-    &quot;uuid&quot;: &quot;bd130902-4ea5-44c0-9005-843152bb69ed&quot;,&#xd;
+    &quot;uuid&quot;: &quot;${uuid}&quot;,&#xd;
     &quot;sailContextVersion&quot;: &quot;5&quot;&#xd;
-}</stringProp>
+}&#xd;
+/*{&#xd;
+    &quot;#t&quot;: &quot;UiConfig&quot;,&#xd;
+    &quot;updates&quot;: {&#xd;
+        &quot;#t&quot;: &quot;SaveRequest?list&quot;,&#xd;
+        &quot;#v&quot;: [&#xd;
+            {&#xd;
+                &quot;_cId&quot;: &quot;${modifyTitleValues_cId}&quot;,&#xd;
+                &quot;label&quot;: &quot;Update Requirement&quot;,&#xd;
+                &quot;model&quot;: {&#xd;
+                    &quot;#t&quot;: &quot;ButtonWidget&quot;,&#xd;
+                    &quot;action&quot;: &quot;SUBMIT&quot;&#xd;
+                },&#xd;
+                &quot;value&quot;: {&#xd;
+                    &quot;#v&quot;: &quot;&quot;,&#xd;
+                    &quot;#t&quot;: &quot;string&quot;&#xd;
+                },&#xd;
+                &quot;saveInto&quot;: [&#xd;
+                    &quot;${modifyTitleValues_saveInto}&quot;&#xd;
+                ],&#xd;
+                &quot;saveType&quot;: &quot;PRIMARY&quot;,&#xd;
+                &quot;isAsyncRequest&quot;: false,&#xd;
+                &quot;capabilities&quot;: 3&#xd;
+            }&#xd;
+        ]&#xd;
+    },&#xd;
+    &quot;context&quot;: {&#xd;
+        &quot;type&quot;: &quot;stateful&quot;,&#xd;
+        &quot;value&quot;: &quot;${context}&quot;,&#xd;
+        &quot;#t&quot;: &quot;Map&quot;&#xd;
+    },&#xd;
+    &quot;uuid&quot;: &quot;${uuid}&quot;,&#xd;
+    &quot;sailContextVersion&quot;: &quot;5&quot;&#xd;
+}*/&#xd;
+</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -2465,8 +2600,41 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 161 - Get Get Context Value, Uuid, SaveInto, _cId" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 161 ******************************&quot;)
+
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+JAG.setSailContextAndUuid();
+
+log.info(&quot;161 - Req Button Form Context Id value is ---- &quot; +  vars.get(&quot;context&quot;))
+log.info(&quot;161 - Req Button Form Id Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
+
+try{
+
+	//************ Get cId /Get Focus Field Id ******************//	
+/*
+	def focusFieldIdValue = JAG.getObjectsByProperty(&quot;#t&quot;, &quot;FormLayout&quot;).find().focusFieldId		
+	log.info(&quot;150 - Focus Field Id value -----&gt; &quot; + focusFieldIdValue)	
+	vars.put(&quot;focusFieldId&quot;,focusFieldIdValue)
+*/
+
+
+
+}
+catch(e){
+	log.error(&quot;Click Update Requirement Button-161 - Form&quot; + e.message)
+}	</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-163 - P Req Nav">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-163 - P Req Nav" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -2486,7 +2654,7 @@ catch(e){
     },&#xd;
     &quot;context&quot;: {&#xd;
         &quot;type&quot;: &quot;stateful&quot;,&#xd;
-        &quot;value&quot;: &quot;wx4EAwMC0EVzoM/oFZYBZSDdHucJ7VpuzBFboLV3y9XSoQHsFoHk3JpUCsFUoU9uOhrlz7eoFNC2\r\nyEY0GhDqtfVEhEbqx7/BqLOeaHXKQHBLHur4CTYkf/AhgbrqU1Hk3/LMIOeN3fkB0PuwG5zD1wmN\r\nZ/hdsGXcZeHSCOEQXL9Tt79z/SEqneNidTK1/Q1QPAZjj8pldVGPyf2fUiFoNL05qTsW20dvEK6c\r\nE64lcpSD16l3tkdkxeUxQwbhpU5rmyEr\r\n&quot;,&#xd;
+        &quot;value&quot;: &quot;${Req147_requirementId_contextValue}&quot;,&#xd;
         &quot;#t&quot;: &quot;Map&quot;&#xd;
     },&#xd;
     &quot;identifier&quot;: {&#xd;
@@ -2518,7 +2686,7 @@ catch(e){
         &quot;unselectedTabForegroundColor&quot;: &quot;&quot;,&#xd;
         &quot;faviconHref&quot;: &quot;&quot;&#xd;
     },&#xd;
-    &quot;uuid&quot;: &quot;206eb325-e8a9-485f-9624-e99056b48fb2&quot;,&#xd;
+    &quot;uuid&quot;: &quot;${Req147_requirementId_Uuid}&quot;,&#xd;
     &quot;sailContextVersion&quot;: &quot;1&quot;&#xd;
 }</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
@@ -2616,12 +2784,45 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 166 - Get Get Context Value, Uuid" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 163 ******************************&quot;)
+
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+JAG.setSailContextAndUuid();
+
+log.info(&quot;166 - Req Button Form Context Id value is ---- &quot; +  vars.get(&quot;context&quot;))
+log.info(&quot;166 - Req Button Form Id Uuid value is --- &quot; +  vars.get(&quot;uuid&quot;))
+
+try{
+	
+	//************ Get cId /Get Focus Field Id ******************//	
+/*
+	def focusFieldIdValue = JAG.getObjectsByProperty(&quot;#t&quot;, &quot;FormLayout&quot;).find().focusFieldId		
+	log.info(&quot;150 - Focus Field Id value -----&gt; &quot; + focusFieldIdValue)	
+	vars.put(&quot;focusFieldId&quot;,focusFieldIdValue)
+*/
+
+
+
+}
+catch(e){
+	log.error(&quot;All Tags cId &amp; saveInto extraction&quot; + e.message)
+}	</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-162 - View Summary">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 41 - URPM_09_Click Update Requirement Button-162 - View Summary" enabled="true">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0FPZkdE_IHhgfzoCCsmApc7U3TFrzneA/view/summary</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${recordRefId}/view/summary</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -3528,7 +3729,7 @@ catch(e){
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">C:\GSWell_Loadtesting\DIA_BPS_0826\DIA_BPS_RecordedScripts\DIABPS_41_UpdateRequirementPM_082826_Rec_viewResultsTree_recording - Copy.xml</stringProp>
+          <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>

@@ -39,7 +39,7 @@
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
         <collectionProp name="HeaderManager.headers">
           <elementProp name="" elementType="Header">
             <stringProp name="Header.name">X-APPIAN-CSRF-TOKEN</stringProp>
@@ -52,16 +52,16 @@
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">2</stringProp>
+          <stringProp name="LoopController.loops">1</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller"/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_01_Launch">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_01_Launch" enabled="true">
             <boolProp name="TransactionController.parent">true</boolProp>
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
@@ -268,7 +268,7 @@
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-67 - Tempo" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-67 - Tempo">
               <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -726,7 +726,7 @@
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-71 - Nav">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-71 - Nav" enabled="true">
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/nav</stringProp>
@@ -873,7 +873,7 @@
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-74 - Interface">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_03_Login-74 - Interface" enabled="true">
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/home/interface</stringProp>
@@ -966,7 +966,7 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_04_Click Requirements Tab" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_04_Click Requirements Tab">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
@@ -1083,7 +1083,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
@@ -1172,6 +1172,36 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 80 - Get Requirement/Record Ref Id">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.*
+import jmeter.appian.groundswell.Jag2
+
+log.info(&quot;****************************** Post Processor 80 ******************************&quot;)
+
+def JAG = new Jag2(log,vars,prev.getResponseDataAsString());
+
+try{
+	
+//************ Get Record Ref Id ******************//
+
+	def recordRefIdParentJson = JAG.getObjectsByType(&quot;RecordLink&quot;).find({it?.toString()?.contains(&quot;requirements&quot;)})
+	log.info(&quot;Record Ref ID Parent block Json-----&gt; &quot; + JsonOutput.toJson(recordRefIdParentJson))
+
+	def recordRefIdJson = new JsonSlurper().parseText(JsonOutput.toJson(recordRefIdParentJson))
+
+	def recordRefIdValue = recordRefIdJson._recordRef
+	log.info(&quot;Record Ref Id value is -----&gt;${recordRefIdValue}&lt;-----&quot;)
+	vars.put(&quot;PP80_recordRefId&quot;, &quot;${recordRefIdValue}&quot;)
+}
+catch(e){
+	log.error(&quot;Record Id extraction&quot; + e.message)
+}</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
         </hashTree>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_05_Click Requirement" enabled="false">
@@ -1180,7 +1210,7 @@
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement-81 - Flush">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement-81 - Flush" enabled="true">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1287,12 +1317,12 @@
             <hashTree/>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link-82 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link-82 - Nav">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/nav</stringProp>
@@ -1395,11 +1425,11 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link-83" enabled="false">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_05_Click Requirement ID Link-83 - View Requirememt Summary">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0EPZm7mxDHrPeo_cwL8b-Lns8-O1luRQ/view/summary</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${PP80_recordRefId}/view/summary</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1495,13 +1525,19 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action">
+            <intProp name="ActionProcessor.action">0</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree/>
         </hashTree>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 129 - VRPM_06_Click Scenarios Tab" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_06_Click Scenarios Tab-84 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_06_Click Scenarios Tab-84 - Nav">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/nav</stringProp>
@@ -1604,11 +1640,11 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_06_Click Scenarios Tab-85" enabled="false">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_06_Click Scenarios Tab-85">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0EPZm7mxDHrPeo_cwL8b-Lns8-O1luRQ/view/_jxvnmQ</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${PP80_recordRefId}/view/_jxvnmQ</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1823,7 +1859,7 @@
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_07_Click Planning Line Items Tab-87 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_07_Click Planning Line Items Tab-87 - Nav">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/nav</stringProp>
@@ -1926,11 +1962,11 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_07_Click Planning Line Items Tab-88" enabled="false">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_07_Click Planning Line Items Tab-88">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0EPZm7mxDHrPeo_cwL8b-Lns8-O1luRQ/view/_3fsKCA</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${PP80_recordRefId}/view/_3fsKCA</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2032,7 +2068,7 @@
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_08_Click Documents Tab-89 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_08_Click Documents Tab-89 - Nav">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/nav</stringProp>
@@ -2135,11 +2171,11 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_08_Click Documents Tab-90" enabled="false">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_08_Click Documents Tab-90">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0EPZm7mxDHrPeo_cwL8b-Lns8-O1luRQ/view/_hQ20kQ</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${PP80_recordRefId}/view/_hQ20kQ</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2450,11 +2486,11 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_09_Click Related Actions Tab-93" enabled="false">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_09_Click Related Actions Tab-93">
             <stringProp name="TestPlan.comments">Diabled during modification</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/yOo9ow6oJhzTw5zOxQm8gTSVAFHJnLY_du65axp2UDbSuwRe5ZJD6ILp7BmXhZziGORJQf2XXmoZKXk0FPZMur5ybU4V2o6ItO0Z5_-tp0EPZm7mxDHrPeo_cwL8b-Lns8-O1luRQ/view/actions</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/record/${PP80_recordRefId}/view/actions</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2556,7 +2592,7 @@
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_10_Click Requiremensts Tab-94 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_10_Click Requiremensts Tab-94 - Nav">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements/nav</stringProp>
@@ -2659,7 +2695,7 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_10_Click Requiremensts Tab-95 - P Requirements" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_10_Click Requiremensts Tab-95 - P Requirements">
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
             <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/page/p.requirements</stringProp>
@@ -2768,7 +2804,7 @@
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_11_SignOut-96" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 129 - VRPM_11_SignOut-96">
             <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -2782,7 +2818,7 @@
                 <elementProp name="X-APPIAN-CSRF-TOKEN" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">X-APPIAN-CSRF-TOKEN</stringProp>
-                  <stringProp name="Argument.value">e695611a-29c3-42fb-a354-4b1bec61345f</stringProp>
+                  <stringProp name="Argument.value">${COOKIE___appianCsrfToken}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -3000,7 +3036,7 @@
         <stringProp name="ProxyControlGui.default_encoding">UTF-8</stringProp>
       </ProxyControl>
       <hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
