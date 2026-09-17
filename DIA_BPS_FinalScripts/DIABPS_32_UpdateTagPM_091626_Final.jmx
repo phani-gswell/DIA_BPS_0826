@@ -69,7 +69,7 @@
         </collectionProp>
       </HeaderManager>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -101,7 +101,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -174,7 +174,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -281,7 +281,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -361,7 +361,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -426,7 +426,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -491,7 +491,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -563,7 +563,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -616,7 +616,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -708,7 +708,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -800,7 +800,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -842,7 +842,7 @@
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_03_Login-12 - Interface" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_03_Login-12 - Interface">
               <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -856,7 +856,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -933,7 +933,7 @@
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 12 - Capture Process / TaskId" enabled="true">
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 12 - Capture Process / TaskId">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
@@ -953,22 +953,22 @@ try{
 	//************ Capture Process/Task Id ******************//
 
 	def reportStubUrlParentJson = JAG.getObjectsByType(&quot;CardLayout&quot;).find({it?.toString()?.contains(&quot; TAGS&quot;)})
-	log.info(&quot;TaskId: Parent block 1 -----&gt; &quot; + JsonOutput.toJson(reportStubUrlParentJson))	
+	log.info(&quot;TaskId: Parent block 1 -----&gt;&quot; + JsonOutput.toJson(reportStubUrlParentJson))	
 	 
 	def reportStubUrlTaskIdJson = JAG.getObjectsByProperty(reportStubUrlParentJson, &quot;#t&quot;, &quot;ReportLink&quot;).find()
-	log.info(&quot;TaskId: Parent block 2 -----&gt; &quot; + JsonOutput.toJson(reportStubUrlTaskIdJson))	
+	log.info(&quot;TaskId: Parent block 2 -----&gt;&quot; + JsonOutput.toJson(reportStubUrlTaskIdJson))	
 	
-	def reportStubUrlTaskId = new JsonSlurper().parseText(JsonOutput.toJson(reportStubUrlTaskIdJson))
-//	log.info(&quot;TaskId: Parent block 3 -----&gt; &quot; + reportStubUrlTaskId)
+	def reportUrlStubJson = new JsonSlurper().parseText(JsonOutput.toJson(reportStubUrlTaskIdJson))
+//	log.info(&quot;TaskId: Parent block 3 -----&gt; &quot; + reportUrlStubJson)
 
-	def TaskId = reportStubUrlTaskId.reportUrlStub
-	log.info(&quot;Report TaskId value is *****&gt;${TaskId}&lt;*****&quot;)
-	vars.put(&quot;PP12_Task_Id&quot;, &quot;${TaskId}&quot;)
+	def reportUrlStubValue = reportUrlStubJson.reportUrlStub
+	log.info(&quot;Report Url Stub value is *****&gt;${reportUrlStubValue}&lt;*****&quot;)
+	vars.put(&quot;PP12_reportUrlStub&quot;, &quot;${reportUrlStubValue}&quot;)
 
 	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)	
 }
 catch(e){
-	log.error(&quot;Step 3_12 - PP12 - Capture Process / TaskId&quot; + e.message)
+	log.error(&quot;Step 03_12 - PP12 - Capture Process / TaskId&quot; + e.message)
 }</stringProp>
               </JSR223PostProcessor>
               <hashTree/>
@@ -980,7 +980,7 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_04_Click Tags AR-14 - Nav" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_04_Click Tags AR-14 - Nav">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1079,7 +1079,7 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 14 - Capture Uuid, Context" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 14 - Capture Uuid, Context">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1102,11 +1102,11 @@ log.info(&quot;-----------------------------------------------------------------
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_04_Click Tags AR-15 - Report Link" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_04_Click Tags AR-15 - Report Link">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_Task_Id}/reportlink</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_reportUrlStub}/reportlink</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1205,7 +1205,7 @@ log.info(&quot;-----------------------------------------------------------------
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  15 - Capture Context Value, Uuid, _cId, SaveInto" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  15 - Capture Context Value, Uuid, _cId, SaveInto">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1239,7 +1239,7 @@ try{
 	
 }
 catch(e){
-	log.error(&quot;Step 4_15 - PP15 - Capture Context Value, Uuid, _cId, SaveInto&quot; + e.message)
+	log.error(&quot;Step 04_15 - PP15 - Capture Context Value, Uuid, _cId, SaveInto&quot; + e.message)
 }</stringProp>
             </JSR223PostProcessor>
             <hashTree/>
@@ -1361,16 +1361,16 @@ catch(e){
             <hashTree/>
           </hashTree>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 33 - UTPM_05_Click View Tag Details Icon" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="DIABPS 33 - UTPM_05_Click View Tag Details Icon">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_05_Click View Tag Details Icon-17 - Report Link" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_05_Click View Tag Details Icon-17 - Report Link">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_Task_Id}/reportlink</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_reportUrlStub}/reportlink</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1510,7 +1510,7 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 17 - Capture opaqueRecordRef, opaqueRelatedActionId" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 17 - Capture opaqueRecordRef, opaqueRelatedActionId">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1581,7 +1581,7 @@ try{
 	
 }
 catch(e){
-	log.error(&quot;Step 5_17 - PP17 - Capture opaqueRecordRef, opaqueRelatedActionId&quot; + e.message)
+	log.error(&quot;Step 05_17 - PP17 - Capture opaqueRecordRef, opaqueRelatedActionId&quot; + e.message)
 }
 </stringProp>
             </JSR223PostProcessor>
@@ -1695,7 +1695,7 @@ catch(e){
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_06_Click Update Tag-24 - Record Latest" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_06_Click Update Tag-24 - Record Latest">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1800,7 +1800,7 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 24 - Capture Tag title, cId, saveInto, context and uuid" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 24 - Capture Tag title, cId, saveInto, context and uuid">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1837,15 +1837,15 @@ try{
 
 	//************ Get Tag Name ******************//    
 
-	def modifyTagNameValue = modifyTagParentJson.value
-	vars.put(&quot;PP24_modifyTagName&quot;, modifyTagNameValue)
-	log.info(&quot;24 - modify Tag Name is -----&gt;&quot; + modifyTagNameValue)    
+	def currentTagNameValue = modifyTagParentJson.value
+	vars.put(&quot;PP24_currentTagName&quot;, currentTagNameValue)
+	log.info(&quot;24 - Current Tag Name is -----&gt;&quot; + currentTagNameValue)    
 
 	log.info(&quot;-------------------------------------------------------------------------------------------------&quot;)	
 	
 }
 catch(e){
-	log.error(&quot;Step 6_24 - PP24 - Capture Tag title, cId, saveInto, context and uuid&quot; + e.message)
+	log.error(&quot;Step 06_24 - PP24 - Capture Tag title, cId, saveInto, context and uuid&quot; + e.message)
 }</stringProp>
             </JSR223PostProcessor>
             <hashTree/>
@@ -1972,7 +1972,7 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_07_Modify Tag Name-26 - Form" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_07_Modify Tag Name-26 - Form">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -1997,7 +1997,7 @@ catch(e){
 				},&#xd;
 				&quot;value&quot;: {&#xd;
 					&quot;#t&quot;: &quot;Text&quot;,&#xd;
-					&quot;#v&quot;: &quot;${modifiedTagName}&quot;&#xd;
+					&quot;#v&quot;: &quot;${PreP26_modifiedTagName}${randomNo}&quot;&#xd;
 				},&#xd;
 				&quot;saveInto&quot;: [&#xd;
 					&quot;${PP24_modifyTag_saveInto}&quot;&#xd;
@@ -2115,11 +2115,11 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - 26 - Modify Tag Name - Replace date time to the existing Title" enabled="true">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - 26 - Modify Tag Name - Replace date time to the existing Title">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <stringProp name="script">String currentTagNameValue = &quot;${PP24_modifyTagName}&quot;
+              <stringProp name="script">String currentTagNameValue = &quot;${PP24_currentTagName}&quot;
 log.info (&quot;The value of current Title value is -----&gt;&quot; + currentTagNameValue)
 
 /*
@@ -2139,13 +2139,13 @@ if (currentTagNameValue.contains(&quot;-&quot;)){
 } else {
 	modifiedTagNameValue = currentTagNameValue + &quot;-&quot; + &quot;${modDateTime}&quot;
 }
-vars.put(&quot;modifiedTagName&quot;, modifiedTagNameValue)
+vars.put(&quot;PreP26_modifiedTagName&quot;, modifiedTagNameValue)
 
 </stringProp>
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 26 - Capture Title Description, Context Value, Uuid, SaveInto, _cId" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 26 - Capture Title Description, Context Value, Uuid, SaveInto, _cId">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -2177,9 +2177,9 @@ try{
 
 	//************ Get Tag Description ******************//
 	
-	def tagDescValue = modifyDescParentJson.value
-	vars.put(&quot;PP26_modifyTagDescription&quot;, tagDescValue)
-	log.info(&quot;26 - Modify Description value is *****&gt;&quot; + tagDescValue)	
+	def currentTagDescValue = modifyDescParentJson.value
+	vars.put(&quot;PP26_currentTagDescription&quot;, currentTagDescValue)
+	log.info(&quot;26 - Current Description value is *****&gt;&quot; + currentTagDescValue)	
 
 	//************ Get Save Into &amp; cId value for click update tag button******************//
 
@@ -2195,7 +2195,7 @@ try{
 
 }
 catch(e){
-	log.error(&quot;Step 7_26 - PP26 - Capture Title Description, Context Value, Uuid, SaveInto, _cId&quot; + e.message)
+	log.error(&quot;Step 07_26 - PP26 - Capture Title Description, Context Value, Uuid, SaveInto, _cId&quot; + e.message)
 }	</stringProp>
             </JSR223PostProcessor>
             <hashTree/>
@@ -2231,7 +2231,7 @@ catch(e){
 				},&#xd;
 				&quot;value&quot;: {&#xd;
 					&quot;#t&quot;: &quot;Text&quot;,&#xd;
-					&quot;#v&quot;: &quot;${modifiedTagDescription}&quot;&#xd;
+					&quot;#v&quot;: &quot;${PreP27_modifiedTagDescription}${randomNo}&quot;&#xd;
 				},&#xd;
 				&quot;saveInto&quot;: [&#xd;
 					&quot;${PP26_modifyDesc_saveInto}&quot;&#xd;
@@ -2349,11 +2349,11 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - 27 - Modify Tag Description - Replace date time to the existing Description" enabled="true">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - 27 - Modify Tag Description - Replace date time to the existing Description">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <stringProp name="script">String currentTagDescValue = &quot;${PP26_modifyTagDescription}&quot;
+              <stringProp name="script">String currentTagDescValue = &quot;${PP26_currentTagDescription}&quot;
 log.info (&quot;The value of current Title value is -----&gt;&quot; + currentTagDescValue)
 
 /*
@@ -2373,13 +2373,13 @@ if (currentTagDescValue.contains(&quot;-&quot;)){
 } else {
 	modifiedTagDescValue = currentTagDescValue + &quot;-&quot; + &quot;${modDateTime}&quot;
 }
-vars.put(&quot;modifiedTagDescription&quot;, modifiedTagDescValue)
+vars.put(&quot;PreP27_modifiedTagDescription&quot;, modifiedTagDescValue)
 
 </stringProp>
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 27 - Capture Uuid, Context" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - 27 - Capture Uuid, Context">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -2699,7 +2699,7 @@ log.info(&quot;27 - Update Tag Button Uuid value is --- &quot; +  vars.get(&quot
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  30 - Capture Context Value, Uuid, _cId, SaveInto" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  30 - Capture Context Value, Uuid, _cId, SaveInto">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -2736,17 +2736,17 @@ catch(e){
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="true">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="false">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">3000</stringProp>
           </TestAction>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_09_Click Update Tag Button-29 - Report Link" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_09_Click Update Tag Button-29 - Report Link">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_Task_Id}/reportlink</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_reportUrlStub}/reportlink</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2890,7 +2890,7 @@ catch(e){
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  29 - Capture Context Value, Uuid, _cId, SaveInto" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor -  29 - Capture Context Value, Uuid, _cId, SaveInto">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -2933,11 +2933,11 @@ catch(e){
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_10_Click All Tags Link-31 - Report Link" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DIABPS 33 - UTPM_10_Click All Tags Link-31 - Report Link">
             <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_Task_Id}/reportlink</stringProp>
+            <stringProp name="HTTPSampler.path">/suite/rest/a/sites/latest/gibs-planning/pages/p.home/report/${PP12_reportUrlStub}/reportlink</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -3343,7 +3343,7 @@ catch(e){
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Recording Controller" enabled="false"/>
         <hashTree/>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
